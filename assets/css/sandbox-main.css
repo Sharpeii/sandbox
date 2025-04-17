@@ -1,0 +1,63 @@
+.main-menu .menu-item-has-children > a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.main-menu .menu-item-has-children > a::after {
+    content: '\f078'; /* Font Awesome "chevron-down" */
+    font-family: "Font Awesome 6 Pro";
+    font-weight: 700;
+    font-size: 12px;
+    margin-left: 7px;
+    transition: transform 0.2s ease;
+}
+
+.main-menu .menu-item-has-children:hover > a::after {
+    transform: rotate(180deg) !important;
+}
+.filter-button button{
+    color: var(--white);
+    display: inline-flex;
+    gap: 8px;
+
+}
+
+/*******Стили для спиннера******/
+.ajax-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.spinner {
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border-left-color: var(--theme);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/*******Анимация плавного появления карточек******/
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition-delay: var(--delay, 0s);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
