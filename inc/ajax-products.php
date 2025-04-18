@@ -102,7 +102,16 @@ function load_products_callback() {
 		$args['meta_query'] = $meta_query;
 	}
 	
-	$tax_query = [];
+	$tax_query = array('relation' => 'AND');
+	
+	// Текущий термин страницы (например, атрибут), для архивной страницы
+	if (!empty($form_data['current_taxonomy']) && !empty($form_data['current_term'])) {
+		$tax_query[] = array(
+			'taxonomy' => sanitize_text_field($form_data['current_taxonomy']),
+			'field'    => 'slug',
+			'terms'    => sanitize_text_field($form_data['current_term']),
+		);
+	}
 	
 	// Категории
 	if (!empty($categories)) {
@@ -133,20 +142,25 @@ function load_products_callback() {
 		}
 	}
 	
-	if (!empty($tax_query)) {
+	if (count($tax_query) > 1) {
 		$args['tax_query'] = $tax_query;
 	}
+//	if (!empty($tax_query)) {
+//		$args['tax_query'] = $tax_query;
+//	}
 	
 	$query = new WP_Query($args);
 	ob_start();
 	if ($query->have_posts()) { ?>
 	
 
-<!--		<div class="product-layout --><?php //echo esc_attr($view_type === 'list' ? 'list-layout' : 'grid-layout'); ?><!--">-->
 			<div class="row">
 				<?php
 				while ($query->have_posts()) {
 					$query->the_post();
+					
+					global $product;
+					$product = wc_get_product(get_the_ID()); //явно создаем объект $product
 					
 					if ($view_type === 'list') {
 						get_template_part('template-parts/products/tab', 'curriculum');
@@ -157,7 +171,6 @@ function load_products_callback() {
 				wp_reset_postdata();
 				?>
 			</div>
-<!--		</div>-->
 
 		<!-- Пагинация -->
 		<div class="page-nav-wrap">

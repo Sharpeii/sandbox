@@ -23,6 +23,12 @@
     gap: 8px;
 
 }
+.product-details-wrapper .tab-content .product-details-item.style-2 .shop-image{
+    width: 35%;
+}
+ins{
+    text-decoration: none;
+}
 
 /*******Стили для спиннера******/
 .ajax-loader {

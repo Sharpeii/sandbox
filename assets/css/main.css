@@ -1,12 +1,4 @@
-/*
-Theme Name: Ecomas
-Author: Gramentheme
-Author URI: https://themeforest.net/user/Gramentheme/portfolio
-Description: Ecomas - Multipurpose Ecommerce HTML Template
-Service Html Template
-Version: 1.0.0
-*/
-/*CSS Table Of Content Ends Here*/
+
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
 :root {
@@ -10257,4 +10249,4 @@ input.main-search-input::placeholder {
 }
 .testimonial-wrapper .testimonial-content .array-buttons .array-next:hover {
   background-color: var(--theme);
-}/*# sourceMappingURL=main.css.map */
+}
