@@ -76,15 +76,15 @@ $max_price = !empty($prices) ? ceil(max($prices)) : 1000;
 				<input type="hidden" name="current_term" value="<?php echo $current_term_slug; ?>">
 
 				<!-- Диапазон цен -->
-				<h6><?php _e('Цена', 'woocommerce'); ?></h6>
+				<h6 class="filter-price-title"><?php _e('Цена', 'woocommerce'); ?></h6>
 				<input type="hidden" id="price-range" data-min="<?php echo esc_attr($min_price); ?>"
 					   data-max="<?php echo esc_attr($max_price); ?>" readonly>
 				<input type="hidden" name="min_price" id="min-price">
 				<input type="hidden" name="max_price" id="max-price">
 				<div id="price-slider-range"></div>
 				<div class="price-slider-container">
-					<p>от <span id="min-price-label"><?php echo $min_price; ?></span></p>
-					<p>до <span id="max-price-label"><?php echo $max_price; ?></span></p>
+					<p>от <span id="min-price-label"><?php echo $min_price; ?> </span> ₽</p>
+					<p>до <span id="max-price-label"><?php echo $max_price; ?></span> ₽</p>
 				</div>
 
 				<!-- Чекбоксы наличия и распродажи -->
@@ -120,7 +120,9 @@ $max_price = !empty($prices) ? ceil(max($prices)) : 1000;
 									'hide_empty' => true
 								));
 								foreach ($categories as $category) {
-									echo '<label><input type="checkbox" name="categories[]" value="' . esc_attr($category->term_id) . '"> ' . esc_html($category->name) . '</label>';
+									echo '<label class="custom-checkbox"><input class="filter-input-text" type="checkbox" name="categories[]" value="' . esc_attr
+										($category->term_id) . '"><span class="checkmark"></span> ' . esc_html
+										($category->name) . '<span> (' . esc_html($category->count) .  ')</span></label>'; //если нужен счетчик товаров
 								}
 								?>
 							</div>
@@ -132,7 +134,7 @@ $max_price = !empty($prices) ? ceil(max($prices)) : 1000;
 						<h2 class="accordion-header" id="headingTags">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 									data-bs-target="#collapseTags" aria-expanded="false" aria-controls="collapseTags">
-								<?php _e('Метки', 'woocommerce'); ?>
+								<?php _e('Коллекции', 'woocommerce'); ?>
 							</button>
 						</h2>
 						<div id="collapseTags" class="accordion-collapse collapse" aria-labelledby="headingTags">
@@ -140,7 +142,8 @@ $max_price = !empty($prices) ? ceil(max($prices)) : 1000;
 								<?php
 								$tags = get_terms('product_tag');
 								foreach ($tags as $tag) {
-									echo '<label><input type="checkbox" name="tags[]" value="' . esc_attr($tag->term_id) . '"> ' . esc_html($tag->name) . '</label>';
+									echo '<label class="custom-checkbox"><input type="checkbox" name="tags[]" value="' . esc_attr
+										($tag->term_id) . '"><span class="checkmark"></span> ' . esc_html($tag->name) . '</label>';
 								}
 								?>
 							</div>
@@ -168,9 +171,12 @@ $max_price = !empty($prices) ? ceil(max($prices)) : 1000;
 									 aria-labelledby="heading<?php echo esc_attr($taxonomy); ?>">
 									<div class="accordion-body">
 										<?php foreach ($terms as $term) : ?>
-											<label><input type="checkbox"
+											<label class="custom-checkbox">
+												<input type="checkbox"
 														  name="attributes[<?php echo esc_attr($taxonomy); ?>][]"
-														  value="<?php echo esc_attr($term->term_id); ?>"> <?php echo esc_html($term->name); ?>
+														  value="<?php echo esc_attr($term->term_id); ?>">
+												<span class="checkmark"></span>
+												<?php echo esc_html($term->name); ?>
 											</label>
 										<?php endforeach; ?>
 									</div>
@@ -181,11 +187,11 @@ $max_price = !empty($prices) ? ceil(max($prices)) : 1000;
 				</div>
 
 				<!-- Кнопки -->
-				<div class="mt-3">
+				<div class=" btns-wrapper">
 					<button type="button" id="apply-filter"
-							class="btn btn-primary"><?php _e('Применить фильтр', 'woocommerce'); ?></button>
+							class="btn btn-primary apply-filter"><?php _e('Применить фильтр', 'woocommerce'); ?></button>
 					<button type="button" id="reset-filter"
-							class="btn btn-secondary"><?php _e('Сбросить фильтр', 'woocommerce'); ?></button>
+							class="btn btn-secondary underline-hover"><?php _e('Сбросить фильтр', 'woocommerce'); ?></button>
 				</div>
 			</form>
 		</div>
@@ -278,13 +284,9 @@ $max_price = !empty($prices) ? ceil(max($prices)) : 1000;
 			<div class="product-details-wrapper">
 				<div class="top-content">
 					<h2><?php woocommerce_page_title(); ?></h2>
-					<?php woocommerce_breadcrumb(); ?>
-					<ul class="list">
-						<li>Home</li>
-						<li>
-							Only Categories
-						</li>
-					</ul>
+					
+					<?php custom_woo_breadcrumbs(); ?>
+					
 				</div>
 				<div class="product-details-sideber">
 					
@@ -312,12 +314,12 @@ $max_price = !empty($prices) ? ceil(max($prices)) : 1000;
 
 					<div class="shop-right">
 						<div class="catalog-sort">
-							<!--				<label for="sort-by">-->
-							<?php //_e('сортировать:', 'woocommerce'); ?><!--</label>-->
+<!--											<label for="sort-by">-->
+<!--							--><?php //_e('сортировать:', 'woocommerce'); ?><!--</label>-->
 							<select id="sort-by">
-								<!--					<option value="menu_order" -->
-								<?php //selected($orderby, 'menu_order'); ?><!-->-->
-								<?php //_e('сортировать по:', 'woocommerce'); ?><!--</option>-->
+													<option value="menu_order"
+								<?php selected($orderby, 'menu_order'); ?>>
+								<?php _e('сортировать по:', 'woocommerce'); ?></option>
 								<option value="date" <?php selected($orderby, 'date'); ?>><?php _e('по новизне', 'woocommerce'); ?></option>
 								<option value="popularity" <?php selected($orderby, 'popularity'); ?>><?php _e('по популярности', 'woocommerce'); ?></option>
 								<option value="price" <?php selected($orderby, 'price'); ?>><?php _e('цена: по возрастанию', 'woocommerce'); ?></option>

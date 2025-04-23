@@ -29,6 +29,201 @@
 ins{
     text-decoration: none;
 }
+.catalog-sort{
+    width: 170px;
+}
+.nice-select{
+    width: 100%;
+
+}
+.nice-select.open .list, .nice-select .option.selected.focus{
+    text-transform: lowercase;
+}
+.price-slider-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+.filter-price-title{
+    margin-bottom: 15px;
+}
+
+.form-check input[type="checkbox"]:checked + label, .form-check-label:hover, input[type="checkbox"]:checked + label{
+    color: var(--theme);
+}
+.form-check-input[type=checkbox], input[type="checkbox"], .filter-input-text[type="checkbox"]{
+    border-radius: 0;
+    border-color: var(--theme);
+}
+.form-check-input[type=checkbox]:checked, .filter-input-text[type="checkbox"]:checked{
+    background-color: var(--theme);
+    color: white;
+}
+.accordion-body label .filter-input-text{
+    transform: translateY(3px);
+    border-radius: 0;
+    border-color: var(--theme);
+}
+.accordion-body label{
+    display: block;
+}
+.form-check{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+label, input{
+    cursor: pointer;
+}
+.form-check-input, input[type="checkbox"]{
+    width: 18px;
+    height: 18px;
+    margin-top: 0;
+}
+.accordion-item{
+border: none;
+    border-bottom: 1px solid rgb(85, 88, 91, .2);
+}
+.accordion-item:first-of-type{
+    border-radius: inherit;
+}
+.accordion-item:first-of-type .accordion-button{
+    border-radius: inherit;
+}
+.accordion-button:not(.collapsed){
+    background-color: transparent;
+    color: var(--theme);
+}
+.accordion-button:focus, .accordion-button:not(.collapsed), .form-check-input:focus{
+    box-shadow: none;
+}
+.accordion-collapse.collapse.show{
+    border-top: none;
+}
+/*****Кастомный чекбокс****/
+/* Скрываем оригинальный чекбокс */
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Создаем кастомный чекбокс */
+.checkmark {
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border: 1px solid var(--theme);
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Стиль для отмеченного чекбокса */
+.custom-checkbox input:checked ~ .checkmark {
+    background-color: var(--theme);
+    border-color: var(--theme);
+}
+
+/* Галочка (скрыта по умолчанию) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Показываем галочку при выборе */
+.custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+.custom-checkbox{
+    cursor: pointer;
+}
+.custom-checkbox:hover{
+    color: var(--theme);
+}
+/****Слайдер цены****/
+.ui-widget.ui-widget-content{
+    border: none;
+
+}
+.ui-slider-horizontal .ui-slider-range{
+    height: 30%;
+    background-color: var(--theme);
+}
+.ui-slider-horizontal .ui-slider-handle{
+    top: -.4em;
+}
+.ui-slider .ui-slider-handle{
+    width: 11px;
+    background-color: var(--theme);
+    border-color: var(--theme);
+}
+.btn-secondary{
+    color: var(--text);
+    background: transparent;
+    border: none;
+}
+.btns-wrapper{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+}
+.apply-filter{
+    background-color: var(--header);
+    padding: 17px 40px;
+    transition: all 0.4s ease-in-out;
+    border: none;
+    border-radius: inherit;
+}
+.apply-filter:hover{
+    background-color: var(--theme);
+    border: none;
+    border-radius: inherit;
+}
+/****Анимация подчеркивания****/
+.underline-hover {
+    position: relative;
+    text-decoration: none; /* Убираем стандартное подчеркивание */
+
+}
+.underline-hover::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    bottom: 15px;
+    width: 86%;
+    height: 1px;
+    background-color: var(--theme);
+    transform: scaleX(0); /* Начальное состояние — линия сжата */
+    transform-origin: left; /* Анимация начинается слева */
+    transition: transform 0.3s ease;
+}
+
+.underline-hover:hover::after {
+    transform: scaleX(1); /* Линия растягивается */
+}
+.btn-secondary:hover{
+    background: none;
+}
+.underline-hover {
+    transition: color 0.3s ease;
+}
+
+.underline-hover:hover {
+    color: var(--theme); /* Меняем цвет текста */
+}
 
 /*******Стили для спиннера******/
 .ajax-loader {
@@ -66,4 +261,10 @@ ins{
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+}
+.separator div{
+    width: 5px;
+    height: 5px;
+    border-radius: 30px;
+    background-color: #A8ACB0;
 }

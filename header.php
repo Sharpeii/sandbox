@@ -50,7 +50,7 @@
                         S
                     </span>
 			</div>
-			<p class="text-center">Loading</p>
+			<p class="text-center">Загрузка</p>
 		</div>
 		<div class="loader">
 			<div class="row">
@@ -225,6 +225,7 @@
                                 <span class="current">
                                     English
                                 </span>
+							
 							<ul class="list">
 								<li data-value="1" class="option selected focus">
 									English

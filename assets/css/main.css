@@ -8176,22 +8176,13 @@ input.main-search-input::placeholder {
 .product-details-wrapper .top-content .list {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 15px;
   margin-top: 20px;
 }
 .product-details-wrapper .top-content .list li {
   position: relative;
 }
-.product-details-wrapper .top-content .list li:not(:last-child)::before {
-  position: absolute;
-  content: "";
-  width: 5px;
-  height: 5px;
-  left: 50px;
-  top: 13px;
-  border-radius: 30px;
-  background-color: #A8ACB0;
-}
+
 .product-details-wrapper .product-details-sideber {
   display: flex;
   align-items: center;
